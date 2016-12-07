@@ -14,7 +14,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
-
 public class QuizQuiz
 {
     private JFrame frame;
@@ -25,7 +24,6 @@ public class QuizQuiz
     private JButton startButton;
     private JTextField field;
     private static int color;
-
     private PaintComponent paint;
     private Timer t, dt;
     private int seconds, delayseconds;
@@ -40,7 +38,6 @@ public class QuizQuiz
     private boolean makeVariationTwoActive;
     private boolean makeVariationThreeActive;
 
-
     public QuizQuiz()
     {
         setUpDelayTimer();
@@ -48,86 +45,85 @@ public class QuizQuiz
         color = 0;
         finalScore = new JLabel();
         variationOneActive = true;
-	makeVariationTwoActive = false;
-	makeVariationThreeActive = true;
+	    makeVariationTwoActive = false;
+	    makeVariationThreeActive = true;
+
         answer = "";
         gameOver = new ImageComponent( "gameOver.png" );
         wrong = new ImageComponent( "wrong.png" );
         correct = new ImageComponent( "correct.png" );
         time = new JLabel();
+
         variationTwoActive = false;
         variationThreeActive = false;
+
         panel1 = new JPanel();
         panel1.setLayout(new GridLayout(1,3));
- 	panel1a = new JPanel();
-	panel1b = new JPanel();
-	panel1c = new JPanel();
+ 	    panel1a = new JPanel();
+	    panel1b = new JPanel();
+	    panel1c = new JPanel();
         panel1a.setBackground(Color.white);
         panel1b.setBackground(Color.white);
         panel1c.setBackground(Color.white);
         panel1c.setBorder( BorderFactory.createLineBorder( Color.black) );
+
         setUpHearts();
         setUpScore();
+
         panel1.add( panel1a );
         panel1.add( panel1b );
         panel1.add( panel1c );
 
         paint = new PaintComponent();
-	panel3 = new JPanel();
+	    panel3 = new JPanel();
         panel3.setBorder( BorderFactory.createLineBorder( Color.black) );
-	seconds = 50;
+	    seconds = 50;
         time.setText( seconds + "" );
-
-
         frame = new JFrame();
         frame.setSize(1100,750);
         frame.setTitle( "QUIZQUIZ" );
         panel1.setForeground(Color.white);
         panel3.setBackground(Color.white);
         setUpTextField();
-	mainPanel = new JPanel();
+	    mainPanel = new JPanel();
         mainPanel.setLayout( new GridLayout(3,1) );
         mainPanel.add( panel1 );
         setUpStartButton();
         mainPanel.add( panel3 );
         mainPanel.setBackground(Color.white);
-	frame.add( mainPanel );
-	frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	frame.setVisible( true );
+	    frame.add( mainPanel );
+	    frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+	    frame.setVisible( true );
     }
-
 
     public void setUpStartButton()
     {
         JButton asdf = new JButton("Start QuizQuiz!");
         Font lol = asdf.getFont();
-            Font p1a = new Font( "Chalkduster", Font.BOLD, lol.getSize() + 50 );
-            asdf.setFont( p1a );
+        Font p1a = new Font( "Chalkduster", Font.BOLD, lol.getSize() + 50 );
+        asdf.setFont( p1a );
 
         startButton = asdf;
         startButton.setBackground(new Color(50,190,0));
         startButton.setForeground(Color.white);
         startButton.setOpaque(true);
         startButton.setBorderPainted(false);
+
         class ButtonListener implements ActionListener
         {
             public void actionPerformed(ActionEvent event)
             {
                 mainPanel.validate();
-
                 startButton.setVisible( false );
-
-
-
                 setUpTimer();
                 setUpGame();
             }
         }
-              mainPanel.add(startButton);
+
+        mainPanel.add(startButton);
         ActionListener listener = new ButtonListener();
         startButton.addActionListener( listener );
     }
-
 
     public void setUpTextField()
     {
@@ -136,29 +132,21 @@ public class QuizQuiz
         panel3.validate();
         class KeyBoardListener implements KeyListener
         {
-            public void keyPressed( KeyEvent event )
+            public void keyPressed(KeyEvent event)
             {
-
-
-   		if( event.getKeyCode() == KeyEvent.VK_ENTER)
-		{
-                    input = field.getText();
-                    field.setText( "" );
-                    logic();
-                }
+   		           if( event.getKeyCode() == KeyEvent.VK_ENTER)
+		           {
+                       input = field.getText();
+                       field.setText( "" );
+                       logic();
+                   }
             }
-
-
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(KeyEvent e){
             }
-
-
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e){
             }
-
-
         }
 
         KeyListener listener = new KeyBoardListener() ;
@@ -184,13 +172,10 @@ public class QuizQuiz
 
     public void generateImage()
     {
-
-
         mainPanel.remove(1);
         mainPanel.add(paint, 1);
         mainPanel.repaint();
-  }
-
+    }
 
     public void variationThree()
     {
@@ -201,7 +186,6 @@ public class QuizQuiz
         mainPanel.invalidate();
         mainPanel.validate();
         mainPanel.repaint();
-
     }
 
     public void setUpTimer()
@@ -227,7 +211,6 @@ public class QuizQuiz
                 if(seconds==0)
                     logic();
             }
-
         }
 
         ActionListener listener = new TimerListener();
@@ -239,7 +222,6 @@ public class QuizQuiz
         panel1a.add( time );
         panel1a.setBorder( BorderFactory.createLineBorder( Color.black) );
     }
-
 
     public void setUpDelayTimer()
     {
@@ -259,17 +241,15 @@ public class QuizQuiz
                     mainPanel.repaint();
 
                     if( lives > 0 )
-                   {
-                   setUpGame();
+                     {
+                         setUpGame();
                      }
                     else
-                 {
-                  setUpGameOver();
-                  }
+                     {
+                         setUpGameOver();
+                     }
                 }
-
             }
-
         }
 
         ActionListener listener = new TimerListener();
@@ -282,7 +262,6 @@ public class QuizQuiz
         panel1c.add( hearts3 );
         lives = 3;
     }
-
 
     public void updateHearts()
     {
@@ -306,7 +285,6 @@ public class QuizQuiz
         }
     }
 
-
     public void setUpScore()
     {
         JLabel a = new JLabel( "Score: " + score);
@@ -315,48 +293,43 @@ public class QuizQuiz
         a.setFont( p1a );
         panel1b.add( a );
     	panel1b.validate();
-
         panel1b.setBorder( BorderFactory.createLineBorder( Color.black) );
     }
 
-
     public void updateScore()
     {
-	if(input == null || !input.equals(answer))
-        {
-            score += -10;
-            JLabel a = new JLabel("Score: " + score);
-            panel1b.removeAll();
-            Font lol = a.getFont();
-            Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 50 );
-            a.setFont( p1a );
-            panel1b.add( a );
-            panel1b.validate();
-        }
-        else if( input.equals( answer ) )
-	{
-            scoreString = time.getText();
-            score += parseInt( scoreString );
-            JLabel a = new JLabel("Score: " + score);
-            panel1b.removeAll();
-            Font lol = a.getFont();
-            Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 50 );
-            a.setFont( p1a );
-            panel1b.add( a );
-            panel1b.validate();
-	}
-
-
+	       if(input == null || !input.equals(answer))
+           {
+                score += -10;
+                JLabel a = new JLabel("Score: " + score);
+                panel1b.removeAll();
+                Font lol = a.getFont();
+                Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 50 );
+                a.setFont( p1a );
+                panel1b.add( a );
+                panel1b.validate();
+           }
+           else if( input.equals( answer ) )
+	       {
+                scoreString = time.getText();
+                score += parseInt( scoreString );
+                JLabel a = new JLabel("Score: " + score);
+                panel1b.removeAll();
+                Font lol = a.getFont();
+                Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 50 );
+                a.setFont( p1a );
+                panel1b.add( a );
+                panel1b.validate();
+	       }
     }
-
 
     public void logic()
     {
         delayseconds = 2;
         variationTwoActive = false;
-	variationThreeActive = false;
-	makeVariationTwoActive = false;
-	makeVariationThreeActive = false;
+    	variationThreeActive = false;
+    	makeVariationTwoActive = false;
+    	makeVariationThreeActive = false;
         updateScore();
         if( input == null || input.equals( answer ) == false )
         {
@@ -368,27 +341,18 @@ public class QuizQuiz
             mainPanel.validate();
             mainPanel.repaint();
             updateHearts();
-
-
-
             t.stop();
             dt.start();
-
-
         }
         else
         {
-             mainPanel.removeAll();
+            mainPanel.removeAll();
             mainPanel.add(panel1);
             mainPanel.add( new ImageComponent( "correct.png" ) );
             mainPanel.add(panel3);
             mainPanel.invalidate();
             mainPanel.validate();
             mainPanel.repaint();
-
-
-
-
             t.stop();
             dt.start();
         }
@@ -414,28 +378,28 @@ public class QuizQuiz
             makeVariationThreeActive = false;
             generateImage();
             t.start();
-
-
-
         }
         else
-        {JLabel b = new JLabel();
+        {
+            JLabel b = new JLabel();
             color =(int)(Math.random()*3);
             if(color == 0)
-            {b.setText(" COUNT RED SHAPES! ");
-            b.setForeground(Color.red);
-            Font lol = b.getFont();
-            Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
-            b.setFont( p1a );
+            {
+                b.setText(" COUNT RED SHAPES! ");
+                b.setForeground(Color.red);
+                Font lol = b.getFont();
+                Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
+                b.setFont( p1a );
                 panel1b.add( b );
-                panel1b.validate();}
+                panel1b.validate();
+            }
             else if(color == 1)
             {
                 b.setText(" COUNT GREEN SHAPES! ");
                 b.setForeground(Color.green);
                 Font lol = b.getFont();
-            Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
-            b.setFont( p1a );
+                Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
+                b.setFont( p1a );
                 panel1b.add( b );
                 panel1b.validate();
             }
@@ -444,8 +408,8 @@ public class QuizQuiz
                 b.setText(" COUNT BLUE SHAPES! ");
                 b.setForeground(Color.blue);
                 Font lol = b.getFont();
-            Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
-            b.setFont( p1a );
+                Font p1a = new Font( "Serif", Font.BOLD, lol.getSize() + 10 );
+                b.setFont( p1a );
                 panel1b.add( b );
                 panel1b.validate();
             }
@@ -457,7 +421,6 @@ public class QuizQuiz
             generateImage();
             t.start();
         }
-
     }
 
      public static void changeAnswer(String ans)
@@ -470,24 +433,23 @@ public class QuizQuiz
          return variationOneActive;
      }
 
-    public static boolean isVariationTwo()
-    {
-        return variationTwoActive;
-    }
+     public static boolean isVariationTwo()
+     {
+         return variationTwoActive;
+     }
 
-    public static boolean isVariationThree()
-    {
-        return variationThreeActive;
-    }
+     public static boolean isVariationThree()
+     {
+         return variationThreeActive;
+     }
 
-    public static String getSetupAnswer()
-    {
+     public static String getSetupAnswer()
+     {
          return answer;
-    }
+     }
 
-
-    public static int getColor()
-    {
-        return color;
-    }
+     public static int getColor()
+     {
+         return color;
+     }
 }

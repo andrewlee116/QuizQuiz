@@ -6,11 +6,10 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-
 public class PaintComponent extends JComponent
 {
-    private Shapes s;
-    private int answer;
+     private Shapes s;
+     private int answer;
 
      public PaintComponent()
      {
@@ -19,8 +18,8 @@ public class PaintComponent extends JComponent
      }
 
 
-    public void paintComponent(Graphics g)
-    {
+     public void paintComponent(Graphics g)
+     {
         ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
         ArrayList<Ellipse2D.Double> ellips = new ArrayList<Ellipse2D.Double>();
         ArrayList<Line2D.Double> lines = new ArrayList<Line2D.Double>();
@@ -38,7 +37,6 @@ public class PaintComponent extends JComponent
             int whatObject = (int)(Math.random()*3);
             for(int i = 0; i<answer; i++)
             {
-
                 if(whatObject == 0)//Rectangle
                 {
                     s.setObjectType(0);
@@ -46,13 +44,9 @@ public class PaintComponent extends JComponent
                     int d2 = (int)(Math.random()*100); //y
                     int d3 = (int)(Math.random()*100); //w
                     int d4 = (int)(Math.random()*100); //h
-
-
                     g2.draw(new Rectangle(d1,d2,d3,d4));
                     s.addRectContents(new Rectangle(d1,d2,d3,d4) );
-
                 }
-
                 else if( whatObject == 1 )//Ellipse
                 {
                     s.setObjectType(1);
@@ -62,11 +56,7 @@ public class PaintComponent extends JComponent
                     int d4 = (int)(Math.random()*100); //h
                     g2.draw( new Ellipse2D.Double( d1, d2, d3, d4 ) );
                     s.addEllipseContents(new Ellipse2D.Double( d1, d2, d3, d4 ) );
-
-
                 }
-
-
                 else if( whatObject == 2 ) //line
                 {
                     s.setObjectType(2);
@@ -77,17 +67,10 @@ public class PaintComponent extends JComponent
                     g2.draw( new Line2D.Double( d1, d2, d3, d4 ));
                     s.addLineContents(new Line2D.Double( d1, d2, d3, d4 ) );
                 }
-
-
-
             }
-
         }
-
-
         else if (QuizQuiz.isVariationTwo() && !QuizQuiz.isVariationThree()) //is variation two
         {
-
             for(int i = 0; i < answer; i++)
             {
                 int randomX = (int) (Math.random()*2);
@@ -112,8 +95,6 @@ public class PaintComponent extends JComponent
                             rects.get(i).setLocation( rects.get(i).x + xRand, rects.get(i).y );
                         else
                             rects.get(i).setLocation(  rects.get(i).x - xRand, rects.get(i).y);
-
-
                     }
 
                     if( rects.get(i).y + yRand > 100 )
@@ -130,19 +111,14 @@ public class PaintComponent extends JComponent
                         rects.get(i).setLocation( rects.get(i).x, rects.get(i).y + yRand );
                         else
                         rects.get(i).setLocation( rects.get(i).x, rects.get(i).y - yRand );
-
-
                     }
                     g2.draw(rects.get(i));
-
-
                 }
                 else if(s.getObjectType() == 1) //ELLIPSE
                 {
                     ellips = s.getEllipseContents();
                     int xRand = (int)( Math.random() * 8);
                     int yRand = (int) (Math.random() * 8);
-
 
                     if( ellips.get(i).x + xRand > 700 )
                     {
@@ -151,8 +127,6 @@ public class PaintComponent extends JComponent
                     else if( ellips.get(i).x + xRand < 100 )
                     {
                         ellips.get(i).setFrame( ellips.get(i).x + xRand, ellips.get(i).y, ellips.get(i).width, ellips.get(i).height);
-
-
                     }
                     else
                     {
@@ -161,7 +135,6 @@ public class PaintComponent extends JComponent
                         else
                             ellips.get(i).setFrame( ellips.get(i).x - xRand, ellips.get(i).y, ellips.get(i).width, ellips.get(i).height);
                     }
-
 
                     if( ellips.get(i).y + yRand > 100 )
                     {
@@ -178,13 +151,8 @@ public class PaintComponent extends JComponent
                         else
                             ellips.get(i).setFrame( ellips.get(i).x, ellips.get(i).y - yRand ,ellips.get(i).width, ellips.get(i).height);
                     }
-
-
                     g2.draw(ellips.get(i));
-
-
                 }
-
                 else //LINE
                 {
                     lines = s.getLineContents();
@@ -222,10 +190,7 @@ public class PaintComponent extends JComponent
                         else
                             lines.get(i).setLine(lines.get(i).x1, lines.get(i).y1-yRand, lines.get(i).x2, lines.get(i).y2-yRand);  //x1 y1 x2 y2
                     }
-
                     g2.draw(lines.get(i));
-
-
                 }
             }
         }
@@ -258,15 +223,10 @@ public class PaintComponent extends JComponent
                         if(QuizQuiz.getColor()==2)
                             v3Answer++;
                     }
-
-
                 }
                 else if(s.getObjectType() == 1) //ELLIPSE
                 {
                     ellips = s.getEllipseContents();
-
-
-
                     g2.draw(ellips.get(i));
                     if(whatColor == 0)
                     {
@@ -286,10 +246,7 @@ public class PaintComponent extends JComponent
                         if(QuizQuiz.getColor()==2)
                             v3Answer++;
                     }
-
-
                 }
-
                 else //LINE
                 {
                     lines = s.getLineContents();
@@ -313,12 +270,9 @@ public class PaintComponent extends JComponent
                         if(QuizQuiz.getColor()==2)
                             v3Answer++;
                     }
-
-
                 }
             }
             QuizQuiz.changeAnswer(v3Answer + "");
         }
-
     }
 }
